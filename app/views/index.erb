@@ -2,39 +2,34 @@
 
 <html>
 	<head>
+		<title>Swantime</title>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+
+	<body>
+		<div class="center">
+			<h1>Simple Timetable</h1>		
+			<input type="number" id="id" placeholder="964552" required></input>
+			<div id="btn">Away!</div>
+		</div>
+		
 		
 		<script>
-		
 			function $(id){
 				return document.getElementById(id);
 			}
 			
-			window.onload = function(){
+			var num = $("id");
+			var btn = $("btn");
 			
-				var num = $("id");
-				var btn = $("btn");
-				
-				num.addEventListener("onkeyup", function(){
-					if(num.value == ""){
-						btn.clasList.add("invalid");
-					}else{
-						btn.clasList.remove("invalid");
-					}
-				});
+			num.onkeyup = function(){
+				if(num.value == ""){
+					btn.classList.add("invalid");
+				}else{
+					btn.classList.remove("invalid");
+				}
 			}
-			
-			
-		
 		</script>
-	</head>
-
-	<body>
-		<h1>Simple Timetable</h1>
-
-
-		<input type="number" id="id" placeholder="964552" required></input>
-		<div id="btn">Away!</div>
 	</body>
 </html>

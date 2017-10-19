@@ -14,7 +14,7 @@ get "/user/:id/:tom?" do
 	t = Timetable.new(f)
 
 	if s == nil
-#		erb :index, :locals => {:err => "No data on that user"}
+		erb :index, :locals => {:err => "No data on that user"}
 	else
 		if params["tom"] == "tomorrow"
 			t.getDay(Time.new.wday)
@@ -26,7 +26,21 @@ get "/user/:id/:tom?" do
 	end
 end
 
+post "/error" do
+	name = params["name"]
+	id = params["id"]
+	dets = params["dets"]
+	t = Time.now
+	n = "#{t.year}-#{t.month}-#{t.day]}-#{t.hour}#{t.min}#{t.sec}"
+	File.open("./public/feedback/#{n}.txt") do |f|
+		f.write("Name: #{name}")
+		f.write("ID: #{id}")
+		f.write("Details: #{dets}")
+	end
+	
+	erb :error, :locals => {:done => true}
+end
+
 get "/error" do
-	puts "This is the error page"
-	puts "Check back soon"
+	erb :error
 end
