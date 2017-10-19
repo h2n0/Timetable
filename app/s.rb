@@ -32,7 +32,7 @@ post "/error" do
 	dets = params["dets"]
 	t = Time.now
 	n = "#{t.year}-#{t.month}-#{t.day}-#{t.hour}#{t.min}#{t.sec}"
-	File.open("public/feedback/#{n}.txt") do |f|
+	File.open("public/feedback/#{n}.txt", "w") do |f|
 		f.write("Name: #{name}\n")
 		f.write("ID: #{id}\n")
 		f.write("Details: #{dets}")
