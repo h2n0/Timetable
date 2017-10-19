@@ -4,23 +4,26 @@
 	<head>
 		<title>Swantime - Feedback</title>
 		<meta charset="utf-8"/>
+		<base href="/"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	
 	<body>
-		<h1>Feedback</h1>
-		<a href="/"><< Back</a>
-		<form action="/error" method="post">
-			<input name="name" placeholder="Name"></input></br>
-			<input name="id" placeholder="964552" required></input></br>
-			<textarea name="dets" cols="40" rows="10"></textarea></br>
-			<input type="submit" text="Send feedback" style="resize:none"></input>
-		</form>
-		<% if defined? done %>
-			<div>
-				<p><%= done ? "Success" : "Something went wrong"%></p>
-			</div>
-		<% end %>
+		<div>
+			<h1>Feedback</h1>
+			<a href="/"><< Back</a>
+			<form action="/error" method="post">
+				<input name="name" placeholder="Name"></input></br>
+				<input name="id" placeholder="964552" required></input></br>
+				<textarea name="dets" cols="40" rows="10"></textarea></br>
+				<input type="submit" text="Send feedback" style="resize:none"></input>
+			</form>
+			<% if defined? done %>
+				<div>
+					<p><%= done ? "Success" : "Something went wrong"%></p>
+				</div>
+			<% end %>
+		</div>
 	</body>
 
 </html>

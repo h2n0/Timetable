@@ -4,26 +4,29 @@
 	<head>
 		<title>Swantime - <%= id %></title>
 		<meta charset="utf-8"/>
+		<base href="/"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	
 	<body>
-		<h1><%= id %></h1>
-		<a href="/"><< Back</a>
-		 <div>
-			<% lecs.select!{|l| l.getStart() >= hour} %>
+		<div class="center">
+			<h1><%= id %></h1>
+			<a href="/"><< Back</a>
+			 <div>
+				<% lecs.select!{|l| l.getStart() >= hour} %>
 
-			<% if lecs.length > 0 %>
-				<% lecs.each do |l| %>
-					<div>
-						<h2><%= l.getName() %></h2>
-						<p><%= l.getStart() %></p>
-						<p><%= l.getLocation() %></p>
-					</div>
+				<% if lecs.length > 0 %>
+					<% lecs.each do |l| %>
+						<div>
+							<h2><%= l.getName() %></h2>
+							<p><%= l.getStart() %></p>
+							<p><%= l.getLocation() %></p>
+						</div>
+					<% end %>
+				<% else %>
+					<h2>No lectures today</h2>
 				<% end %>
-			<% else %>
-				<h2>No lectures today</h2>
-			<% end %>
+			</div>
 		</div>
 	</body>
 </html>
