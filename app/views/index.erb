@@ -33,9 +33,7 @@
 			
 			btn.onmouseup = function(){
 				if(btn.classList.contains("invalid"))return;
-				var a = document.createElement("a");
-				a.setAttribute("href", "/user/"+num.value+"/");
-				a.click();
+				window.location = "/user/"+num.value+"/";
 			}
 		</script>
 	</body>
