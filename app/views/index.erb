@@ -11,7 +11,7 @@
 		<div class="center">
 			<h1>Simple Timetable</h1>		
 			<input type="number" id="id" placeholder="964552" required></input>
-			<div id="btn">Away!</div>
+			<div id="btn" class="btn">Away!</div>
 		</div>
 		
 		
@@ -29,6 +29,13 @@
 				}else{
 					btn.classList.remove("invalid");
 				}
+			}
+			
+			btn.onmouseup = function(){
+				if(btn.classList.contains("invalid"))return;
+				var a = document.createElement("a");
+				a.setAttribute("href", "/user/"+num.value+"/");
+				a.click();
 			}
 		</script>
 	</body>
