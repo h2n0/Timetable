@@ -4,6 +4,30 @@
 	<head>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		
+		<script>
+		
+			function $(id){
+				return document.getElementById(id);
+			}
+			
+			window.onload = function(){
+			
+				var num = $("id");
+				var btn = $("btn");
+				
+				num.addEventListener("onkeyup", function(){
+					if(num.value == ""){
+						btn.clasList.add("invalid");
+					}else{
+						btn.clasList.remove("invalid");
+					}
+				});
+			}
+			
+			
+		
+		</script>
 	</head>
 
 	<body>
@@ -11,6 +35,6 @@
 
 
 		<input type="number" id="id" placeholder="964552" required></input>
-		<input type="submit"></input>
+		<div id="btn">Away!</div>
 	</body>
 </html>
