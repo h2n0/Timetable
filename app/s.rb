@@ -1,15 +1,12 @@
-
 #!/usr/bin/ruby
 require "sinatra"
 require_relative "int/parse.rb"
-
-set :public_folder, File.dirname(__FILE__) + "/static"
 
 get "/" do
 	erb :index
 end
 
-get "/user/:id" do
+get "/user/:id/:tom?" do
 	n = params["id"]
 	hour = Time.new.hour
 	s = Student.fromNumber(n)
@@ -17,9 +14,13 @@ get "/user/:id" do
 	t = Timetable.new(f)
 
 	if s == nil
-		erb :index, :locals => {:err => "No data on that user"}
+#		erb :index, :locals => {:err => "No data on that user"}
 	else
-		t.getToday()
+		if params["tom"] == "tomorrow"
+			t.getDay(Time.new.wday)
+		else
+			t.getToday()
+		end
 		erb :user, :locals => {:id => n, :hour => hour, :lecs => t.getLectures(s)}
 	end
 end
