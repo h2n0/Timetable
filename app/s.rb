@@ -18,6 +18,7 @@ get "/user/:id/:tom?" do
 	else
 		if params["tom"] == "tomorrow"
 			t.getDay(Time.new.wday)
+			hour = 8
 		else
 			t.getToday()
 		end
