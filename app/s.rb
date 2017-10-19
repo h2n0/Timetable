@@ -31,10 +31,10 @@ post "/error" do
 	id = params["id"]
 	dets = params["dets"]
 	t = Time.now
-	n = "#{t.year}-#{t.month}-#{t.day]}-#{t.hour}#{t.min}#{t.sec}"
-	File.open("./public/feedback/#{n}.txt") do |f|
-		f.write("Name: #{name}")
-		f.write("ID: #{id}")
+	n = "#{t.year}-#{t.month}-#{t.day}-#{t.hour}#{t.min}#{t.sec}"
+	File.open("public/feedback/#{n}.txt") do |f|
+		f.write("Name: #{name}\n")
+		f.write("ID: #{id}\n")
 		f.write("Details: #{dets}")
 	end
 	
