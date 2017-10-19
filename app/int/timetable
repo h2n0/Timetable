@@ -1,0 +1,1226 @@
+<!-- X-URL: https://science.swansea.ac.uk/intranet/attendance/timetable -->
+<!-- Date: Thu, 19 Oct 2017 14:06:15 GMT -->
+<BASE HREF="https://science.swansea.ac.uk/intranet/attendance/timetable">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=10; IE=11; IE=EDGE" />
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow">
+    <title>College of Science Intranet - Timetable</title>
+    <link href="/intranet/static/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+    <link rel="stylesheet" href="/intranet/static/CACHE/css/c4e96f2ad5da.css" type="text/css" />
+
+    <link rel="stylesheet" href="/intranet/static/CACHE/css/6b657bdc53f9.css" type="text/css" />
+
+    
+    
+    <script type="text/javascript" charset="utf-8" src="/intranet/static/script/intranet.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/intranet/static/script/intranet.ui.js"></script>
+    <script type="text/javascript">
+        $.intranet.jsonRPCEndpointURL = '/intranet/json/'
+        $(function() {
+            $.intranet.ensureZebraStripes()
+        })
+    </script>
+    
+
+    
+    <link href="/intranet/static/attendance/css/timetable.css" rel="stylesheet" type="text/css" />
+    <link href="/intranet/static/attendance/css/timetable-print.css" rel="stylesheet" type="text/css" media="print" />
+    <script type="text/javascript" src="/intranet/static/attendance/script/timetable.js"></script>
+    <script type="text/javascript">
+        var currentStartDate = $.datepicker.parseDate("yy/mm/dd", "2017/10/16")
+        var baseTimetableURL = "/intranet/attendance/timetable"
+        var queryString = "?"
+        
+            var usePartialRefresh = true
+        
+    </script>
+
+</head>
+<body class="wide">
+
+<div class="header">
+    <img id="logo" src="/intranet/static/skins/science/img/logo-original-small.png" width="150" height="107" alt="Swansea University">
+
+    <div id="headerlinks">
+        
+            <p id="logout">Logged in as <strong>Elliot Lee-Cerrino</strong>.
+                (<a href="/intranet/help/">Help</a>,
+              
+                 <a href="/intranet/accounts/logout">Logout</a>)</p>
+        
+    </div>
+    
+    <div id="wrapper">
+        <h1><a href="/intranet/"> College of Science Intranet</a></h1>
+
+        <div class="nav">
+            
+    
+    
+                
+            
+    
+
+    
+
+            <a href="/intranet/">Home</a> &gt; <a href="/intranet/attendance/">Attendance</a> &gt; <span class="item current">Timetable</span>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="pagecontent">
+    
+<p><strong><font color="red">"Changes may still be made to the timetable, so please check regularly."</font></strong></p>
+
+<p><strong><font color="red">"You must remember to swipe your ID card within 10 minutes of the start of your timetabled activity."</font></strong></p>
+
+
+<div id="contenttoolbar">
+    <div id="links" class="noprint">
+        
+            <a id="leftlink"  class="" href="/intranet/attendance/timetable/2017/10/09?">&larr; Previous</a>
+            <a id="rightlink" class="" href="/intranet/attendance/timetable/2017/10/23?">Next &rarr;</a>
+        
+    </div>
+    <h2 class=printonly id=timetableprintdeptinfo>
+        
+            
+                964552&apos;s Timetable
+            
+        
+    </h2>
+    <h2 id=timetabletitle>
+        
+            Week beginning <span id=currentweek><span id=currentweekspan>16th October 2017</span><input readonly id=currentweekinput type=text value="16th October 2017" /></span>
+        
+    </h2>
+    <br style="clear: both" class=noprint />
+</div>
+
+
+
+    <ul class="topfilterlist noprint">
+        
+         
+            
+                <li class=current>My Timetable</li>
+            
+        
+        
+            
+                <li><a href="?department=BIOL">Biosciences</a></li>
+            
+        
+            
+                <li><a href="?department=CHEM">Chemistry</a></li>
+            
+        
+            
+                <li><a href="?department=CSCI">Computer Science</a></li>
+            
+        
+            
+                <li><a href="?department=GEOG">Geography</a></li>
+            
+        
+            
+                <li><a href="?department=MATH">Mathematics</a></li>
+            
+        
+            
+                <li><a href="?department=PHYS">Physics</a></li>
+            
+        
+        
+            
+                <li><a href="?department=BIOLGEOG">Biosciences &amp; Geography</a></li>
+            
+        
+            
+                <li><a href="?department=S">College of Science (Department)</a></li>
+            
+        
+        
+    </ul>
+
+
+    <ul class="topfilterlist noprint">
+                
+                <li class=current>Weekly</li>
+                
+                
+                
+                        <li><a href="/intranet/attendance/timetable?semester=Semester+1">Semester 1</a></li>
+                
+                
+                
+                        <li><a href="/intranet/attendance/timetable?semester=Semester+2">Semester 2</a></li>
+                
+                
+       
+    </ul>
+
+
+    <ul class="topfilterlist noprint">
+        
+            <li class=current>All Types</li>
+        
+        
+            
+                <li><a href="?type=Careers+Fair">Careers Fair</a></li>
+            
+        
+            
+                <li><a href="?type=Lecture">Lecture</a></li>
+            
+        
+            
+                <li><a href="?type=Practical">Practical</a></li>
+            
+        
+            
+                <li><a href="?type=Practical+%28Computer+Lab%29">Practical (Computer Lab)</a></li>
+            
+        
+            
+                <li><a href="?type=Seminar">Seminar</a></li>
+            
+        
+    </ul>
+
+
+
+
+<div id=timetablewrapper>
+    <div id="loading"></div>
+    
+<table id=timetable class="timetable fullwidth centercells ">
+    <thead>
+        <tr>
+            <th></th>
+            
+                <th class=day>Monday 16th</th>
+                <th class=day>Tuesday 17th</th>
+                <th class=day>Wednesday 18th</th>
+                <th class=day>Thursday 19th</th>
+                <th class=day>Friday 20th</th>
+            
+        </tr>
+    </thead>
+
+    <tr class="odd">
+        <th>9:00</th>
+        
+            <td>
+                <div class=slot data-hour="9" data-day="0" data-day-of-month="16" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="9" data-day="1" data-day-of-month="17" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="31850">
+                            
+                                <strong>CS-110</strong>
+                                <span>NAH, JJ, JJR</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Talbot PC Lab 043</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Seminar" class="lecture " data-lecture-pk="31865">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Glyndwr Rm F</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="9" data-day="2" data-day-of-month="18" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="9" data-day="3" data-day-of-month="19" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Seminar" class="lecture " data-lecture-pk="32832">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Wallace Lecture Theatre</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="9" data-day="4" data-day-of-month="20" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+    </tr>
+
+    <tr class="even">
+        <th>10:00</th>
+        
+            <td>
+                <div class=slot data-hour="10" data-day="0" data-day-of-month="16" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="10" data-day="1" data-day-of-month="17" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="31850">
+                            
+                                <strong>CS-110</strong>
+                                <span>NAH, JJ, JJR</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Talbot PC Lab 043</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Seminar" class="lecture " data-lecture-pk="31868">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Glyndwr F</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="10" data-day="2" data-day-of-month="18" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical" class="lecture " data-lecture-pk="32908">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room"> Faraday B</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical" class="lecture " data-lecture-pk="32980">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Talbot Rm 38</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical" class="lecture " data-lecture-pk="32975">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Talbot Rm 45</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical" class="lecture " data-lecture-pk="32911">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Faraday 314</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical" class="lecture " data-lecture-pk="32910">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Talbot 47</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="10" data-day="3" data-day-of-month="19" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="10" data-day="4" data-day-of-month="20" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+    </tr>
+
+    <tr class="odd">
+        <th>11:00</th>
+        
+            <td>
+                <div class=slot data-hour="11" data-day="0" data-day-of-month="16" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Lecture" class="lecture " data-lecture-pk="31848">
+                            
+                                <strong>CS-110</strong>
+                                <span>NAH, JJ, JJR</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Grove Lecture Theatre </div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="11" data-day="1" data-day-of-month="17" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="31849">
+                            
+                                <strong>CS-110</strong>
+                                <span>NAH, JJ, JJR</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Talbot PC Lab 043</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Seminar" class="lecture " data-lecture-pk="31866">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Glyndwr E</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="11" data-day="2" data-day-of-month="18" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical" class="lecture " data-lecture-pk="32913">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Faraday 314</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical" class="lecture " data-lecture-pk="32912">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Talbot 47</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical" class="lecture " data-lecture-pk="32977">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Talbot Rm 45</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical" class="lecture " data-lecture-pk="32909">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Faraday D</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical" class="lecture " data-lecture-pk="32981">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Talbot Rm 38</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="11" data-day="3" data-day-of-month="19" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Lecture" class="lecture " data-lecture-pk="31861">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Grove Lecture Theatre </div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="11" data-day="4" data-day-of-month="20" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+    </tr>
+
+    <tr class="even">
+        <th>12:00</th>
+        
+            <td>
+                <div class=slot data-hour="12" data-day="0" data-day-of-month="16" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="32877">
+                            
+                                <strong>CS-110</strong>
+                                <span>NAH, JJ, JJR</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Faraday 001</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="31851">
+                            
+                                <strong>CS-110</strong>
+                                <span>NAH, JJ, JJR</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Talbot PC Lab 043</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="12" data-day="1" data-day-of-month="17" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="31849">
+                            
+                                <strong>CS-110</strong>
+                                <span>NAH, JJ, JJR</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Talbot PC Lab 043</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Seminar" class="lecture " data-lecture-pk="31867">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Wallace 113</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="12" data-day="2" data-day-of-month="18" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Lecture" class="lecture " data-lecture-pk="31859">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Grove Lecture Theatre </div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="12" data-day="3" data-day-of-month="19" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="12" data-day="4" data-day-of-month="20" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+    </tr>
+
+    <tr class="odd">
+        <th>13:00</th>
+        
+            <td>
+                <div class=slot data-hour="13" data-day="0" data-day-of-month="16" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Lecture" class="lecture " data-lecture-pk="31860">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Grove Lecture Theatre </div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="13" data-day="1" data-day-of-month="17" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Lecture" class="lecture " data-lecture-pk="31896">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Faraday Lecture Theatre &amp; Faraday L</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="13" data-day="2" data-day-of-month="18" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="13" data-day="3" data-day-of-month="19" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="13" data-day="4" data-day-of-month="20" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Lecture" class="lecture " data-lecture-pk="31897">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Glyndwr D &amp; Faraday M</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+    </tr>
+
+    <tr class="even">
+        <th>14:00</th>
+        
+            <td>
+                <div class=slot data-hour="14" data-day="0" data-day-of-month="16" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="14" data-day="1" data-day-of-month="17" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Lecture" class="lecture " data-lecture-pk="31874">
+                            
+                                <strong>CS-150</strong>
+                                <span>MSMA, ME, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Grove Lecture Theatre </div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="14" data-day="2" data-day-of-month="18" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="14" data-day="3" data-day-of-month="19" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Lecture" class="lecture " data-lecture-pk="31875">
+                            
+                                <strong>CS-150</strong>
+                                <span>MSMA, ME, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Grove Lecture Theatre </div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="14" data-day="4" data-day-of-month="20" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Lecture" class="lecture " data-lecture-pk="31876">
+                            
+                                <strong>CS-150</strong>
+                                <span>MSMA, ME, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Grove Lecture Theatre </div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+    </tr>
+
+    <tr class="odd">
+        <th>15:00</th>
+        
+            <td>
+                <div class=slot data-hour="15" data-day="0" data-day-of-month="16" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Lecture" class="lecture " data-lecture-pk="31895">
+                            
+                                <strong>CS-170</strong>
+                                <span>JEB, FGM, SWP</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Faraday Lecture Theatre &amp; Faraday K</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="15" data-day="1" data-day-of-month="17" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="31862">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Talbot PC Lab 043</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="31864">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Faraday Tower Rm 001 (Windows Lab)</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="15" data-day="2" data-day-of-month="18" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="15" data-day="3" data-day-of-month="19" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="15" data-day="4" data-day-of-month="20" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+    </tr>
+
+    <tr class="even">
+        <th>16:00</th>
+        
+            <td>
+                <div class=slot data-hour="16" data-day="0" data-day-of-month="16" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="16" data-day="1" data-day-of-month="17" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="31862">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Talbot PC Lab 043</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="31864">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Faraday Tower Rm 001 (Windows Lab)</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="16" data-day="2" data-day-of-month="18" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="16" data-day="3" data-day-of-month="19" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="31863">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Talbot PC Lab 043</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="16" data-day="4" data-day-of-month="20" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="32876">
+                            
+                                <strong>CS-110</strong>
+                                <span>NAH, JJ, JJR</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Faraday 001 (PC Lab)</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+    </tr>
+
+    <tr class="odd">
+        <th>17:00</th>
+        
+            <td>
+                <div class=slot data-hour="17" data-day="0" data-day-of-month="16" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="17" data-day="1" data-day-of-month="17" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="17" data-day="2" data-day-of-month="18" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="17" data-day="3" data-day-of-month="19" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="31863">
+                            
+                                <strong>CS-130</strong>
+                                <span>AD, SCL</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Talbot PC Lab 043</div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+            <td>
+                <div class=slot data-hour="17" data-day="4" data-day-of-month="20" data-month-name="October" data-month="10" data-year="2017"><span class=target></span>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="32876">
+                            
+                                <strong>CS-110</strong>
+                                <span>NAH, JJ, JJR</span>
+                            
+                            
+                                <div class="lectureinfo duration">2 hours</div>
+                            
+                            
+                                <div class="lectureinfo room">Faraday 001 (PC Lab)</div>
+                            
+                            
+                            
+                        </div>
+                    
+                        <div rel=tipsy title="Practical (Computer Lab)" class="lecture " data-lecture-pk="32847">
+                            
+                                <strong>CS-110</strong>
+                                <span>NAH, JJ, JJR</span>
+                            
+                            
+                            
+                                <div class="lectureinfo room">Talbot 043 (PC lab) </div>
+                            
+                            
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            </td>
+        
+    </tr>
+
+</table>
+
+</div>
+
+
+
+
+
+<div id=timestamp class=printonly>Printed on 19 Oct 2017. The most recent version is available at https://science.swansea.ac.uk/intranet/attendance/timetable</div>
+
+
+
+
+
+
+
+
+</div>
+
+<div class="footer">
+        
+                <span id="problems">
+            <strong>Any problems with using this system, please contact </strong>
+                
+                        
+                        <a href="mailto:s.kanamarlapudi@swansea.ac.uk">
+                        Sridevi Kanamarlapudi
+                        </a>
+                        
+                </a>
+             </span>
+        
+       </strong>
+   
+</div>
+
+
+    
+
+
+
+    <script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-2764516-12']);
+_gaq.push(['_setDomainName', 'swansea.ac.uk']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+
+
+</body>
+</html>
+
