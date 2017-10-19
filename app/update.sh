@@ -1,7 +1,18 @@
 
 ruby check.rb
+
+if [ $? != 0 ]; then
+	echo "Somthing went wrong!"
+	exit 1
+fi
 FILES=$(cat dl.txt)
-cd int
+
+if [ ! -d "int" ]; then
+	mkdir int
+	cd int
+else
+	cd int
+fi
 rm cmd.py
 rm *.pyc
 rm *.sh
