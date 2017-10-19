@@ -3,6 +3,8 @@
 require "sinatra"
 require_relative "int/parse.rb"
 
+set :public_folder, File.dirname(__FILE__) + "/static"
+
 get "/" do
 	erb :index
 end
