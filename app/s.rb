@@ -2,6 +2,9 @@
 require "sinatra"
 require_relative "int/parse.rb"
 
+f = Nokogiri::HTML(open("int/timetable"))
+t = Timetable.new(f)
+
 get "/" do
 	erb :index
 end
@@ -10,8 +13,6 @@ get "/user/:id/:tom?" do
 	n = params["id"]
 	hour = Time.new.hour
 	s = Student.fromNumber(n)
-	f = Nokogiri::HTML(open("int/timetable"))
-	t = Timetable.new(f)
 
 	if s == nil
 		erb :index, :locals => {:err => "No data on that user"}
