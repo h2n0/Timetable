@@ -32,9 +32,17 @@
 				}
 			}
 			
-			btn.onmouseup = function(){
+			function showTimetable(){
 				if(btn.classList.contains("invalid"))return;
 				window.location = "/user/"+num.value+"/";
+			}
+			
+			
+			btn.onmouseup = showTimetable();
+			document.onkeyup = function(e){
+				if(e.keyCode == 13){
+					showTimetable();
+				}
 			}
 		</script>
 	</body>
