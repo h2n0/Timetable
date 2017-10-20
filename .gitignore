@@ -1,3 +1,4 @@
-info.rb
-app/int/*
+app/info.rb
+app/int/aloc2.txt
+app/int/settings.py
 app/public/feedback/*
