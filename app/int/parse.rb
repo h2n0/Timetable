@@ -46,7 +46,7 @@ class Student
 	
 	def self.loadAll()
 		res = []
-		File.open("aloc2.txt").each do |line|
+		File.open("int/aloc2.txt").each do |line|
 			res.push(fromNumber(line.split(" ")[0]))
 		end
 		return res.sort!{|s1,s2| s1.getID() <=> s2.getID()}
@@ -54,7 +54,7 @@ class Student
 	
 	def self.fromNumber(id)
 		found = false
-		File.open("aloc2.txt").each do |line|
+		File.open("int/aloc2.txt").each do |line|
 			p = line.split(" ")
 			if p[0] == "#{id}"
 				return fromArgs(p)
@@ -333,10 +333,10 @@ class Timetable
 						next
 					end
 			
-					if(s.getGroup() == 2 && l.getLength() != 1)
+					if(s.getGroup() == 2 && l.getLength() != 1) #In group 2 and the lecture is 2 hours long
 						next
 					end
-					if(s.getGroup() == 3 && l.getLength() != 2)
+					if(s.getGroup() == 3 && l.getLength() != 2) #In group 3 and the lecture is 1 hour long
 						next
 					end
 				end
