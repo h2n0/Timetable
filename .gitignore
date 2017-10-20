@@ -4,3 +4,4 @@ app/int/settings.py
 app/int/*.pyc
 app/int/timetable
 app/public/feedback/*
+app/public/logs/*

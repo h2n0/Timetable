@@ -1,9 +1,11 @@
 #!/usr/bin/ruby
 require "sinatra"
 require_relative "int/parse.rb"
+require_relative "int/logger.rb"
 
 f = Nokogiri::HTML(open("int/timetable"))
 t = Timetable.new(f)
+log = Logger.new("public/logs/")
 
 get "/" do
 	erb :index
