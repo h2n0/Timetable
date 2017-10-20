@@ -2,3 +2,16 @@
 	width: 60%;
 	margin: 0 auto;
 }
+
+.btn{
+	width: 20%
+	margin: 0 auto;
+	background-color: #CCC;
+	border: 2px solid #AAA;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.btn.invalid{
+	cursor: default;
+}
