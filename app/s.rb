@@ -3,6 +3,8 @@ require "sinatra"
 require_relative "int/parse.rb"
 require_relative "int/logger.rb"
 
+
+trap("SIGINT") { throw :ctrl_c }
 f = Nokogiri::HTML(open("int/timetable"))
 t = Timetable.new(f)
 log = Logger.new("public/logs/")
@@ -17,8 +19,10 @@ get "/user/:id/:tom?" do
 	s = Student.fromNumber(n)
 
 	if s == nil
+		log.log("Unable to find user info for ID: #{n}\n#{params}")
 		erb :index, :locals => {:err => "No data on that user"}
 	else
+		log.log("Found info for user with ID: #{n}")
 		if params["tom"] == "tomorrow"
 			t.getDay(Time.now.wday)
 			hour = 8
@@ -29,7 +33,7 @@ get "/user/:id/:tom?" do
 	end
 end
 
-post "/error" do
+post "/feedback" do
 	name = params["name"]
 	id = params["id"]
 	dets = params["dets"]
@@ -38,12 +42,18 @@ post "/error" do
 	File.open("public/feedback/#{n}.txt", "w") do |f|
 		f.write("Name: #{name}\n")
 		f.write("ID: #{id}\n")
-		f.write("Details: #{dets}")
+		f.write("Details: #{dets}\n")
 	end
-	
+	log.log("Feedback was posted")
 	erb :error, :locals => {:done => true}
 end
 
-get "/error" do
+get "/feedback" do
 	erb :error
+end
+
+
+error 404 do
+	log.err("Something wasn't found\n#{params}")
+	redirect "/"
 end

@@ -4,6 +4,7 @@ class Logger
 		Dir.mkdir(@loc) unless File.exists?(@loc)
 		#@num = Dir[File.join(@loc, '**', '*')].count {|file| File.file?(file)}
 		log("Server initialize")
+		puts "Running logger!"
 	end
 	
 	def getTimestamp()
@@ -17,5 +18,12 @@ class Logger
 		end
 	end
 	
+	def err(msg)
+		log("[ERROR!] #{msg}")
+	end
 	
+	def close()
+		log("Server closed!")
+		puts "Logger stopping!"
+	end
 end
