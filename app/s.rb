@@ -3,8 +3,6 @@ require "sinatra"
 require_relative "int/parse.rb"
 require_relative "int/logger.rb"
 
-
-trap("SIGINT") { throw :ctrl_c }
 f = Nokogiri::HTML(open("int/timetable"))
 t = Timetable.new(f)
 log = Logger.new("public/logs/")
