@@ -4,14 +4,15 @@
 }
 
 .btn{
-	width: 20%
+	width: 20%;
 	margin: 0 auto;
-	background-color: #CCC;
-	border: 2px solid #AAA;
+	text-align: center;
+	padding: 1%;
 	border-radius: 6px;
 	cursor: pointer;
 }
 
 .btn.invalid{
 	cursor: default;
+	
 }

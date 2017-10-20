@@ -11,14 +11,14 @@ end
 
 get "/user/:id/:tom?" do
 	n = params["id"]
-	hour = Time.new.hour
+	hour = Time.now.hour
 	s = Student.fromNumber(n)
 
 	if s == nil
 		erb :index, :locals => {:err => "No data on that user"}
 	else
 		if params["tom"] == "tomorrow"
-			t.getDay(Time.new.wday)
+			t.getDay(Time.now.wday)
 			hour = 8
 		else
 			t.getToday()

@@ -14,7 +14,7 @@
 			<h1><%= id %></h1>
 			<a href="/"><< Back</a>
 			 <div>
-				<% lecs.select!{|l| l.getStart() >= hour} %>
+				<% lecs.select!{|l| l.getStart() > hour} %>
 
 				<% if lecs.length > 0 %>
 					<% lecs.each do |l| %>
@@ -27,6 +27,7 @@
 				<% else %>
 					<h2>No lectures today</h2>
 				<% end %>
+				<a href="/error">Something wrong?</a>
 			</div>
 		</div>
 	</body>
