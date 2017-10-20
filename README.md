@@ -1,6 +1,5 @@
 # Swantime
 A simple web app to easy filter out correct lecture times for students.
-
 Build using.
 
 * Ruby => Sinatra and Nokogiri, used primarily to server and parse information
@@ -17,12 +16,13 @@ Build using.
 
 ### App
 The base of the server, here you will be abe to find all of the routing used to serve pages as well as some helper programs.
+* [s.rb](./app/s.rb) - The main file of the whole thing, this runs the server and managers requests
 
 ### Internal
 This is where most of the magic happens.
 
 * [parse.rb](./app/int/parse.rb) - This is where the timetable is parsed and turned into an easily navigatable object.
-* [cmd.py](./app/int/cmd.py) - This is where we generate the [Lynx](http://http://lynx.browser.org/) command script to get the timetable
+* [cmd.py](./app/int/cmd.py) - This is where we generate the [Lynx](http://lynx.browser.org/) command script to get the timetable
 * [t.sh](./app/int/t.sh) - This is the script that the cron manager on the server calls when it's time to get a new timetable
 
 
