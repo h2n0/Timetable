@@ -6,7 +6,33 @@
 		<meta charset="utf-8"/>
 		<base href="/"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="scripts/paint.js" type="text/javascript"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<script>
+			onchange = function(dom, col){
+				var docs = document.getElementsByClassName("lecture");
+				var plec = dom.parentElement.getAttribute("lec");
+				for(var i = 0; i < docs.length; i++){
+					if(docs[i].getAttribute("lec") == plec){
+						docs[i].style.backgroundColor = "rgb("+col[0]+","+col[1]+","+col[2]+")";
+					}
+				}
+			}
+			
+			onfinish = function(dom, col){
+			
+				
+				var d = dom.parentElement.getAttribute("lec");
+			
+			
+				var update = "/user/<%= id %>/cols/"+d+"/";
+				for(var i = 0; i < col.length; i++){
+					update += col[i] + "/";
+				}
+				window.location = update;
+			}
+		</script>
 	</head>
 	
 	<body>
@@ -18,10 +44,23 @@
 
 				<% if lecs.length > 0 %>
 					<% lecs.each do |l| %>
-						<div>
+						
+						<% col = "#FFF" %>
+						
+						<% if colors != nil %>
+						<% col = colors["CS-110"] if l.getName() == "CS-110" %>
+						<% col = colors["CS-130"] if l.getName() == "CS-130" %>
+						<% col = colors["CS-150"] if l.getName() == "CS-150" %>
+						<% col = colors["CS-170"] if l.getName() == "CS-170" %>
+						<% col = "#FF" if col == nil %>
+						<% end %>
+						
+						<div class="lecture" lec="<%= l.getName() %>"style="background-color: <%= col %>">
 							<h2><%= l.getName() %></h2>
 							<p><%= l.getStart() %></p>
 							<p><%= l.getLocation() %></p>
+							
+							<p onclick="paintInit(this)">Edit</p>
 						</div>
 					<% end %>
 				<% else %>
