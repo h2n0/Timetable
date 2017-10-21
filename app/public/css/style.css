@@ -1,10 +1,18 @@
 body{
-	font-family: "san-serif";
+	font-family: "sans-serif";
+}
+
+html{
+	
 }
 
 .center{
 	width: 60%;
 	margin: 0 auto;
+}
+
+h1{
+	text-align: center;
 }
 
 .btn{
@@ -13,10 +21,25 @@ body{
 	text-align: center;
 	padding: 1%;
 	border-radius: 6px;
+	background-color: #A7D8FF;
 	cursor: pointer;
+	transition: 0.2s background-color;
+}
+
+input#id{
+	width: 40%;
+	text-align: center;
+	font-size: 3em;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 1%;
+	border: none;
+	background-color: inherit;
+	border-bottom: 2px solid #CCC;
 }
 
 .btn.invalid{
+	background-color: #CCC;
 	cursor: default;
 	
 }

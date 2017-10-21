@@ -25,12 +25,16 @@
 			var num = $("id");
 			var btn = $("btn");
 			
-			num.onkeyup = function(){
+			function emptyCheck(){
 				if(num.value == ""){
 					btn.classList.add("invalid");
 				}else{
 					btn.classList.remove("invalid");
 				}
+			}
+			
+			num.onkeyup = function(){
+				emptyCheck();
 			}
 			
 			function showTimetable(){
@@ -39,12 +43,17 @@
 			}
 			
 			
-			btn.onmouseup = showTimetable();
+			btn.onmouseup = function(){
+				showTimetable();
+			}
 			document.onkeydown = function(e){
 				if(e.keyCode == 13){
 					showTimetable();
 				}
 			}
+			
+			//Just to make sure that it looks right when the page loads
+			emptyCheck();
 		</script>
 	</body>
 </html>

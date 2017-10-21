@@ -13,9 +13,13 @@
 		<div class="center">
 			<h1>Feedback</h1>
 			<a href="/"><< Back</a>
-			<form action="/feedback" autofill="off" method="post">
+			<form action="/feedback" autocomplete="off" method="post">
 				<input name="name" placeholder="Name"></input></br>
-				<input name="id" placeholder="964552" required></input></br>
+				<% if id != nil %>
+					<input name="id" placeholder="964552" value=<%= id %> required></input></br>
+				<% else %>
+					<input name="id" placeholder="964552" required></input></br>
+				<% end %>
 				<textarea name="dets" cols="40" rows="10"></textarea></br>
 				<input type="submit" text="Send feedback" style="resize:none"></input>
 			</form>

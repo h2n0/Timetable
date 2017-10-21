@@ -46,8 +46,8 @@ post "/feedback" do
 	erb :error, :locals => {:done => true}
 end
 
-get "/feedback" do
-	erb :error
+get "/feedback/:id?" do
+	erb :error, :locals => {:id => params["id"]}
 end
 
 
