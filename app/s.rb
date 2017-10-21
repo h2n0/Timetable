@@ -35,8 +35,8 @@ post "/feedback" do
 	name = params["name"]
 	id = params["id"]
 	dets = params["dets"]
-	t = Time.now
-	n = "#{t.year}-#{t.month}-#{t.day}-#{t.hour}#{t.min}#{t.sec}"
+	ti = Time.now
+	n = "#{ti.year}-#{ti.month}-#{ti.day}-#{ti.hour}:#{ti.min}:#{ti.sec}"
 	File.open("public/feedback/#{n}.txt", "w") do |f|
 		f.write("Name: #{name}\n")
 		f.write("ID: #{id}\n")

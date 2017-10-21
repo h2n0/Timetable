@@ -15,8 +15,9 @@
 			<a href="/"><< Back</a>
 			<form action="/feedback" autocomplete="off" method="post">
 				<input name="name" placeholder="Name"></input></br>
-				<% if id != nil %>
-					<input name="id" placeholder="964552" value=<%= id %> required></input></br>
+				<% if defined? id %>
+					
+					<input name="id" placeholder="964552" value="<%= id %>" required></input></br>
 				<% else %>
 					<input name="id" placeholder="964552" required></input></br>
 				<% end %>
