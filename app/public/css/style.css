@@ -15,6 +15,11 @@ h1{
 	text-align: center;
 }
 
+footer{
+	position: absolute;
+	bottom: 2%;
+}
+
 .btn{
 	width: 20%;
 	margin: 0 auto;
