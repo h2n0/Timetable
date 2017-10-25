@@ -1,4 +1,4 @@
-class Logger
+class SWLogger
 	def initialize(loc)
 		@loc = loc
 		Dir.mkdir(@loc) unless File.exists?(@loc)

@@ -6,8 +6,11 @@ function hsvToRgb(h, s, v) {
 	var r, g, b;
 	var i;
 	var f, p, q, t;
+	
+	//Allow us to "cycle" the color range
 	while (h > 360) h -= 360;
 	while (h < 0) h += 360;
+	
 	// Make sure our arguments stay in-range
 	h = Math.max(0, Math.min(360, h));
 	s = Math.max(0, Math.min(100, s));
@@ -97,11 +100,22 @@ var opened = false;
 var onchange = null;
 var onfinish = null;
 var cols = null;
+var pdom = null;
 
 function paintInit(dom){
-	if(opened)return;
+	if(opened){
+		pdom.removeChild($("paintHolder"));
+		onchange = null;
+		onfinish = null;
+		opened = false;
+		pdom = null;
+		can = null;
+		ctx = null;
+		return;
+	}
 	dom = dom || document.body;
 	var div = document.createElement("div");
+	div.id = "paintHolder";
 	var ncan = document.createElement("canvas");
 	ncan.id = "can";
 	var np = document.createElement("p");
@@ -116,8 +130,8 @@ function paintInit(dom){
 	can.width = 150;
 	can.height = 150;
 	opened = true;
-	console.log(dom);
 	drawMid(0);
+	pdom = dom;
 	
 	np.onmousedown = function(e){
 		if(onfinish){

@@ -1,10 +1,17 @@
 apt-get update > /dev/null
-apt-get uprade > /dev/null
+apt-get upgrade > /dev/null
 
 # Really, really need this one
 apt-get install ruby > /dev/null
 if [ $? != 0 ]; then
 	echo "Failed to install ruby"
+	exit 1
+fi
+
+# Needed to get an updated timetable
+apt-get install lynx > /dev/null
+if [ $? != 0 ]; then
+	echo "Unable to install Lynx browser"
 	exit 1
 fi
 
