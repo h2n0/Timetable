@@ -19,7 +19,6 @@ class Student
 	
 	def self.fromArgs(parts=ARGV[0].strip.split(" "))
 		id = parts[0].strip #Student ID
-	
 		lastName = ""
 		group = 0
 		seminarGroup = 0
@@ -156,6 +155,10 @@ class Lecture
 
 	def to_s()
 		return "#{@name} - #{@sta} - #{getEnd()} - #{@loc}"
+	end
+	
+	def to_json(*a)
+		return {:name => @name, :start => @sta, :location => @loc, :length => @len}.to_json(*a)
 	end
 
 end

@@ -5,3 +5,4 @@ app/int/*.pyc
 app/int/timetable
 app/public/feedback/*
 app/public/logs/*
+app/client_secrets.json

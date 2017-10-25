@@ -38,6 +38,7 @@
 	<body>
 		<div class="center">
 			<h1><%= id %></h1>
+			<h2>- <%= day %> -</h2>
 			<a href="/"><< Back</a>
 			 <div>
 				<% lecs.select!{|l| l.getStart() > hour} %>
