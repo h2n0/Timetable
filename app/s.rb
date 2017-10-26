@@ -270,14 +270,14 @@ get "/gcal" do
 			else
 				if tomLecs.items.length > lecs.length
 					puts "Tomorrow has more events than we do"
-					for i in 0..tomLecs.items.length
+					for i in 0..tomLecs.items.length - 1
 						ctl = tomLecs.items[i]
 						
 						if ctl == nil
 							next
 						end
 						
-						for j in 0..lecs.length
+						for j in 0..lecs.length - 1
 							cl = lecs[j]
 							
 							if ctl.summary == cl.getName() && cl.getDateTime() == ctl.start.date_time # Same name and same time, don't add this one
@@ -287,10 +287,10 @@ get "/gcal" do
 					end
 				elsif lecs.length > tomLecs.items.length
 					puts "We have more"
-					for i in 0..lecs.length-1
+					for i in 0..lecs.length - 1
 						needed = true
 						cl = lecs[i]
-						for j in 0..tomLecs.items.length-1
+						for j in 0..tomLecs.items.length - 1
 							ctl = tomLecs.items[j]
 							if cl.getName() == ctl.summary && cl.getDateTime() == ctl.start.date_time
 								needed = false
