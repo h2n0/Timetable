@@ -4,11 +4,16 @@ require 'json'
 
 
 class EasyCalendar
+
+	# @param [Signet::OAuth2::Client] google OAuth
+	# @see https://developers.google.com/identity/protocols/OAuth2WebServer OAuth
 	def initialize(auth)
 		@service = Google::Apis::CalendarV3::CalendarService.new
 		@service.authorization = auth
 	end
 	
+	# Get a calendar by its name
+	# @param name [String] the name of the calendar that the user is after
 	def getCalendarByName(name)
 		cals = @service.list_calendar_lists()
 		res = cals.items.select{|l| l.summary == name}
@@ -19,6 +24,10 @@ class EasyCalendar
 		end
 	end
 	
+	# Add a new calendar to the users calendar system
+	# @param name [String] the name of the calendar we want to create
+	# @return [Google::Apis::CalendarV3::Calendar]
+	# @see https://github.com/google/google-api-ruby-client/blob/master/generated/google/apis/calendar_v3/service.rb Calendar
 	def addNewCalendar(name)
 		calendar = Google::Apis::CalendarV3::Calendar.new(
   		summary: name
@@ -26,6 +35,15 @@ class EasyCalendar
   	return @service.insert_calendar(calendar)
 	end
 	
+	# Create a Google calendar event
+	# @param name [String] the name of the event we want to create
+	# @param info:hour [Int] the starting hour of the event
+	# @param info:minute [Int] the start minute of the event
+	# @param info:length [Int] the length of the event
+	# @param info:date [String] the day the event is going to start on
+	# @param info:location [String] the location of the event
+	# @return [Google::Apis::CalendarV3::Event]
+	# @see https://github.com/google/google-api-ruby-client/blob/master/generated/google/apis/calendar_v3/service.rb Event
 	def createEvent(name, info)
 		hour = info[:hour]
 		minute = (info[:minute] || 00)
@@ -50,42 +68,25 @@ class EasyCalendar
 		return entry
 	end
 	
+	# Get all the evens for X days time
+	# @param calendar [Google::Apis::CalendarV3::Calendar] the calendar to look in
+	# @param forward [Int] the number of days to look ahead
+	# @return [Google::Apis::CalendarV3::Events]
+	# @see https://github.com/google/google-api-ruby-client/blob/master/generated/google/apis/calendar_v3/service.rb Events
 	def getEventsForXDaysTime(calendar, forward)
 		day = 60* 60 * 24
 		min = Time.now + (day*forward)
 		max = min + day
 		response = @service.list_events(calendar.id, max_results: 10, single_events: true, order_by: 'startTime', time_min: min.iso8601, time_max: max.iso8601)
-
+		return response
 	end
 	
+	# Add an event to the given calendar
+	# @param calendar [Google::Apis::CalendarV3::Calendar] the calendar we want to add to
+	# @param event [Google::Apis::CalendarV3::Event] the event we want to add
+	# @see #createEvent
 	def addEvent(calendar, event)
 		@service.insert_event(calendar.id, event)
 	end
 
 end
-
-=begin
-get '/' do
-  unless session.has_key?(:credentials)
-    redirect to('/callback')
-  end
-  client_opts = JSON.parse(session[:credentials])
-  auth_client = Signet::OAuth2::Client.new(client_opts)
-  
-  calendar = EasyCalendar.new(auth_client)
-  
-  cal = calendar.getCalendarByName("Uni Timetable")
-  
-  if cal == nil
-  	puts "Adding a new calendar"
-  	cal = calendar.addNewCalendar("Uni Timetable")
-  else
-  	puts "Found an existing calendar"
-  end
-  
-  ev = calendar.createEvent("CS-110", {:day => 24, :hour => 11, :month => 10, :minute => 0, :length => 2, :location => "Talbot 043"})
-  calendar.addEvent(cal, ev)
-  
-
-end
-=end

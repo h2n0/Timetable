@@ -6,3 +6,5 @@ app/int/timetable
 app/public/feedback/*
 app/public/logs/*
 app/client_secrets.json
+.yardoc/
+app/yardoc/

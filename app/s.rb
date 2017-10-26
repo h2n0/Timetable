@@ -10,9 +10,16 @@ require_relative "int/gcal.rb"
 enable :sessions
 set :session_secret, "setme"
 
+# Load the timetable from
 f = Nokogiri::HTML(open("int/timetable"))
 t = Timetable.new(f)
 log = SWLogger.new("public/logs/")
+callbackURI = ""
+
+if ARGV[0] == 'production'
+	puts "Running in produciton mode!"
+	callbackURI = "http://plaintime.com/permCall"
+end
 
 
 # Needed to keep cookies around for more than a single session
@@ -21,6 +28,8 @@ set(:cookie_options) do
 end
 
 get "/" do
+	# Show the index file
+	# found in /public/views/
 	erb :index
 end
 
@@ -49,17 +58,20 @@ get "/user" do
 	redirect "/user/#{id}/"
 end
 
+# JSON API
 get "/user/:id/*/json" do
+	
+	#  Get the user id and the student with that ID
 	n = params["id"]
-	s = Student.fromNumber(n)
+	s = Student.fromNumber(n) 
 	if s == nil
+		content_type :json
 		log.log("Unable to find user info for ID: #{n}\n#{params}")
-		redirect "/"
+		{:status => "Invalid", :lectures => "none"}.to_json # Not found so tell them that
 	else
 		log.log("Found info for user with ID: #{n}")
-		tom = params["splat"][0]
-		hour = 8
-		day = tom == nil ? (Time.now.wday - 1) : tom.to_i
+		tom = params["splat"][0] # The * between the ID and json in the url
+		day = tom == nil ? (Time.now.wday - 1) : tom.to_i # use 'tom' if it's not null else use the actual day
 		if tom == "tomorrow"
 			tday = Time.now.wday
 			t.getDay(tday)
@@ -78,9 +90,9 @@ get "/user/:id/*/json" do
 			t.getToday()
 			hour = Time.now.hour
 		end
-	end		
-	content_type :json
-	t.getLectures(s).to_json
+		content_type :json
+		{:status => "Valid", :day => t.getDayName(), :lectures => t.getLectures(s)}.to_json
+	end
 end
 
 # User is looking at either today or tomorrow's timetable
@@ -147,23 +159,35 @@ post "/feedback" do
 		end
 		log.log("Feedback was posted")
 		suc = true
-	resuce
+	rescue # If it fails for what ever reason don't just crash
 		log.log("Error posting feedback")
 	end
 	erb :error, :locals => {:done => suc}
 end
 
 # User is giving us some feedback
+get "/feedback" do
+	if session[:id] != nil
+		redirect "/feedback/#{session[:id]}"
+	else
+		redirect "/"
+	end
+end
+
 get "/feedback/:id?" do
 	erb :error, :locals => {:id => params["id"]}
 end
 
+# Caled by the Google calendar API
+# Wouldn't recommend touching this
 get "/permCall" do
 	client_secrets = Google::APIClient::ClientSecrets.load
   auth_client = client_secrets.to_authorization
+  
+  call = callbackURI == "" ? url("/permCall") : callbackURI
   auth_client.update!(
     :scope => 'https://www.googleapis.com/auth/calendar',
-    :redirect_uri => url('/permCall'))
+    :redirect_uri => call)
   if request['code'] == nil
     auth_uri = auth_client.authorization_uri.to_s
     redirect to(auth_uri)
@@ -173,16 +197,15 @@ get "/permCall" do
     auth_client.client_secret = nil
     session[:credentials] = auth_client.to_json
     session[:exp] = Time.now + auth_client.expiry
-    puts session[:credentials]
     id = session[:id]
     log.log("Successfully got OAuth code")
     redirect "/gcal"
   end
 end
 
+# Add the events to the users Google calender
 get "/gcal" do
-	id = session[:id] || -1
-	
+	id = session[:id] || -1 # id is equal to session[:id] or -1
 	if id == -1 # User hasn't done anything yet 
 		redirect "/"
 	end
@@ -191,13 +214,19 @@ get "/gcal" do
 		redirect to('/permCall')
 	end
 	
+	# Check if the token has expired
 	if session[:exp] != nil
 		if Time.now > session[:exp]
+			# if it has renew it
 			redirect "/permCall"
 		end
 	end
+	
+	# Google OAuth2 junk
 	client_opts = JSON.parse(session[:credentials])
 	auth_client = Signet::OAuth2::Client.new(client_opts)
+	####
+	
 	ecal = EasyCalendar.new(auth_client)
 	cal = ecal.getCalendarByName("Uni Timetable")
 	s = Student.fromNumber(id)
@@ -211,6 +240,7 @@ get "/gcal" do
 		date = "#{ti.year}-#{ti.month}-#{ti.day}"
 		tomLecs = ecal.getEventsForXDaysTime(cal, 1) #Get tomorrow's events (Lectures)
 		if tomLecs.items.length == 0 # No events tomorrow just add them
+			
 			lecs.each do |l|
 				s = l.getStart()
 				len = l.getLength()
@@ -222,18 +252,72 @@ get "/gcal" do
 				for i in 0..lecs.length
 					cl = lecs[i]
 					ctl = tomLecs.items[i]
-					if cl.getName() == ctl.summary  # Do they have the same name
+					
+					
+					if cl == nil || ctl == nil
 						next
+					end
+					
+					if cl.getName() == ctl.summary  # Do they have the same name
+						next # Skip this event
 					else
 						s = cl.getStart()
 						len = cl.getLength()
 						event = ecal.createEvent(cl.getName(), {:date => date, :hour => s, :length => len , :location => cl.getLocation()})
-						ecal.addEvent(cal, event)
+						#ecal.addEvent(cal, event)
+					end
+				end
+			else
+				if tomLecs.items.length > lecs.length
+					puts "Tomorrow has more events than we do"
+					for i in 0..tomLecs.items.length
+						ctl = tomLecs.items[i]
+						
+						if ctl == nil
+							next
+						end
+						
+						for j in 0..lecs.length
+							cl = lecs[j]
+							
+							if ctl.summary == cl.getName() && cl.getDateTime() == ctl.start.date_time # Same name and same time, don't add this one
+								next							
+							end
+						end
+					end
+				elsif lecs.length > tomLecs.items.length
+					puts "We have more"
+					for i in 0..lecs.length
+						needed = true
+						cl = lecs[i]
+						if cl == nil
+							next
+						end
+						for j in 0..tomLecs.items.length
+							ctl = tomLecs.items[j]
+							if cl.getName() == ctl.summary
+								needed = false
+								break
+							end
+						end
+						if needed
+							s = cl.getStart()
+							len = cl.getLength()
+							event = ecal.createEvent(cl.getName(), {:date => date, :hour => s, :length => len , :location => cl.getLocation()})
+						end
 					end
 				end
 			end
 		end
 	end
+	""
+end
+
+# A small function so that when the server gets the latest
+# timetable we can load it without having to restart the server
+get "/updateTime" do	
+	f = Nokogiri::HTML(open("int/timetable"))
+	log.log("Updated the timetable")
 	""
 end
 
