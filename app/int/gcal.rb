@@ -50,7 +50,9 @@ class EasyCalendar
 		endHour = hour + (info[:length] || 1)
 		date = info[:date]
 		
-		t = Time.now
+		dt = DateTime.parse(date)
+		
+		zone = bst?(dt) ? "Etc/GMT-1" : "Etc/GMT"
 		
 		entry = Google::Apis::CalendarV3::Event.new(
 			summary: name,
@@ -58,11 +60,11 @@ class EasyCalendar
 			description: "",
 			start: {
 				date_time: "#{date}T#{hour}:#{minute}:00",
-				time_zone: "Etc/UTC"
+				time_zone: zone
 			},
 			end: {
 				date_time: "#{date}T#{endHour}:#{minute}:00",
-				time_zone: "Etc/UTC"
+				time_zone: zone
 			}
 		)
 		return entry
@@ -75,7 +77,7 @@ class EasyCalendar
 	# @see https://github.com/google/google-api-ruby-client/blob/master/generated/google/apis/calendar_v3/service.rb Events
 	def getEventsForXDaysTime(calendar, forward)
 		day = 60* 60 * 24
-		min = Time.now + (day*forward)
+		min = Time.now + (day * forward)
 		max = min + day
 		response = @service.list_events(calendar.id, max_results: 10, single_events: true, order_by: 'startTime', time_min: min.iso8601, time_max: max.iso8601)
 		return response
@@ -88,5 +90,25 @@ class EasyCalendar
 	def addEvent(calendar, event)
 		@service.insert_event(calendar.id, event)
 	end
-
+	
+	private
+	def bst?(date)
+	
+		march = DateTime.new(date.year, 3, 31).to_date
+		while !march.sunday?
+			march = march.next_day(-1)
+		end
+		
+		march = DateTime.new(date.year, 3, 31).to_date
+		while !march.sunday?
+			march = march.next_day(-1)
+		end
+		
+		october = DateTime.new(date.year, 10, 31).to_date
+		while !october.sunday?
+			october = october.next_day(-1)
+		end
+	
+		return date > march && date < october
+	end
 end

@@ -287,23 +287,19 @@ get "/gcal" do
 					end
 				elsif lecs.length > tomLecs.items.length
 					puts "We have more"
-					for i in 0..lecs.length
+					for i in 0..lecs.length-1
 						needed = true
 						cl = lecs[i]
-						if cl == nil
-							next
-						end
-						for j in 0..tomLecs.items.length
+						for j in 0..tomLecs.items.length-1
 							ctl = tomLecs.items[j]
-							if cl.getName() == ctl.summary
+							if cl.getName() == ctl.summary && cl.getDateTime() == ctl.start.date_time
 								needed = false
 								break
 							end
 						end
 						if needed
-							s = cl.getStart()
-							len = cl.getLength()
-							event = ecal.createEvent(cl.getName(), {:date => date, :hour => s, :length => len , :location => cl.getLocation()})
+							puts cl.getLength()
+							event = ecal.createEvent(cl.getName(), {:date => date, :hour => cl.getStart(), :length => cl.getLength() , :location => cl.getLocation()})
 						end
 					end
 				end

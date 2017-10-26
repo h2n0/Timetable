@@ -151,12 +151,12 @@ class Lecture
 	# @param len [Int] the length of the lecture
 	# @param loc [String] the location of the lecture
 	# @param date [DateTime] the DateTime of the lecture
-	def initialize(name,day,sta,len,loc, date)
+	def initialize(name, day, sta, len, loc, date)
 		@name = name.split(" ")[0]
 		@day = day
 		@sta = sta
-		@len = len
-		@loc = loc
+		@len = len || 1
+		@loc = loc.strip
 		@date = date
 	end
 
@@ -256,8 +256,7 @@ class Timetable
 						vals.push(l.children[0])
 					end
 
-					name = "#{vals[0]}"
-					name = name.split(" ")[0]
+					name = "#{vals[0]}".split(" ")[0]
 					where = ""
 					length = 1
 
@@ -265,10 +264,16 @@ class Timetable
 						length = "#{vals[1]}".split(" ")[0].to_i
 						where = vals[2]
 					elsif vals.length == 4
+						length = "#{vals[2]}".split(" ")[0].to_i || 2
 						where = vals[3]
 					elsif vals.length == 2
 						where = vals[1]
 					end
+					
+					if length == 0
+						length = 1
+					end
+					
 					date = DateTime.new(dateYear, dateMonth, dateDay, hour)
 					lectures.push(Lecture.new(name, day, hour, length, "#{where}", date))
 				end
@@ -317,115 +322,148 @@ class Timetable
 		if p
 			puts "--- #{getDayName(td)} ---"
 		end
+		
+		codeLabs = s.getGroup()
+		seminar = s.getSeminar()
+		socLabs = s.getPractical()
+		lastID = s.getLastID()
+		
 		if @specific.length > 0
 			@specific.each do |l|
-			if(td == 0) # Monday
-				if(l.getName() == "CS-110")
-					if(s.getGroup() == 2 && l.getStart() == 12)
-						next
+
+				if td == 0 # Monday
+				
+					if l.getName() == "CS-110"
+						if l.getStart() == 11
+							res.push(l)
+						end
+						
+						if codeLabs == 1 && l.getStart() == 12 && l.getLocation().include?("043")
+							res.push(l)
+						elsif codeLabs == 3 && l.getStart() == 12 && l.getLocation().include?("001")
+							res.push(l)
+						end
 					end
+					
+					if l.getName() == "CS-170" && lastID <= 5
+						res.push(l)
+					end
+					
+					if l.getName() == "CS-130"
+						res.push(l)
+					end
+					
+				elsif td == 1 # Tuesday
+					
+					if l.getName() == "CS-110"
+						if codeLabs == 1 && l.getStart() == 9 && l.getLength() == 2
+							res.push(l)
+						elsif codeLabs == 2 && l.getStart() == 11 && l.getLength == 2
+							res.push(l)
+						end
+					end
+					
+					if l.getName() == "CS-170"
+						if lastID <= 5
+							res.push(l)
+						end
+					end
+					
+					if l.getName() == "CS-150"
+						if l.getStart() == 14
+							res.push(l)
+						end
+					end
+					
+					if l.getName() == "CS-130"
+						if seminar == 1 && l.getStart() == 9
+							res.push(l)
+						elsif seminar == 2 && l.getStart() == 10
+							res.push(l)
+						elsif seminar == 3 && l.getStart() == 11
+							res.push(l)
+						elsif seminar == 4 && l.getStart() == 12
+							res.push(l)
+						end
+						
+						if (socLabs == "A" || socLabs == "B") && l.getStart() == 15 && l.getLocation().include?("043")
+							res.push(l)
+						elsif socLabs == "C" && l.getStart() == 15 && l.getLocation().include?("001")
+							res.push(l)
+						end
+					end
+					
+				elsif td == 2 #Wednesday
+				
+					if l.getName() == "CS-170"
+					
+						if lastID / 2 == 0
+							next unless (lastID / 2 == 0 && (l.getLocation().include?("F") || l.getLocation().include("D")))
+						elsif lastID / 2 == 1
+							next unless (lastID / 2 == 1 && l.getLocation().include?("38"))
+						elsif lastID / 2 == 2
+							next unless (lastID / 2 == 2 && l.getLocation().include?("314"))
+						elsif lastID / 2 == 3
+							next unless (lastID / 2 == 3 && l.getLocation().include?("45"))
+						elsif lastID / 2 == 4
+							next unless (lastID / 2 == 3 && l.getLocation().include?("47"))
+						end
+						
+						if	lastID % 2 == 0
+							if l.getStart() == 10
+								res.push(l)
+							end
+						else
+							if l.getStart() == 11
+								res.push(l)
+							end
+						end
+					end
+					
+					if l.getName() == "CS-130"
+						res.push(l)
+					end
+					
+				elsif td == 3 #Thursday
+					
+					if l.getName() == "CS-130"
+						if seminar == 5 && l.getStart() == 9
+							res.push(l)
+						end
+						
+						if (socLabs == "D" || socLabs == "E") && l.getStart() == 16
+							res.push(l)
+						end
+						
+						if l.getStart() == 11
+							res.push(l)
+						end
+					end
+					
+					if l.getName() == "CS-150"
+						res.push(l)
+					end
+					
+				elsif td == 4 #Friday
+				
+					if l.getName() == "CS-170"
+						res.push(l)
+					end
+					
+					if l.getName() == "CS-150"
+						res.push(l)
+					end
+					
+					if l.getName() == "CS-110"
+						if codeLabs == 3 && l.getStart() == 16 && l.getLength() == 2 && l.getLocation().include?("001")
+							res.push(l)
+						elsif codeLabs == 2 && l.getStart() == 17 && l.getLocation().include?("043")
+							res.push(l)
+						end
+					end
+				
 				end
-			elsif(td == 1) # Tuesday
-				if(l.getName() == "CS-110")
-					if(s.getGroup() == 3)
-						next
-					end
 				
-				
-					if s.getGroup() == 2 && (l.getStart < 11 || l.getEnd > 13)
-						next
-					end
-				
-					if(s.getGroup() == 1 && l.getEnd > 10)
-						next
-					end
-				elsif(l.getName() == "CS-130")
-					if(s.getSeminar() == 5)
-						next
-					end
-			
-					if(l.getStart() >= 9 && l.getEnd() <= 13)
-						if(s.getSeminar() == 1 && l.getStart() != 9)
-							next
-						elsif(s.getSeminar() == 2 && l.getStart() != 10)
-							next
-						elsif(s.getSeminar() == 3 && l.getStart() != 11)
-							next
-						elsif(s.getSeminar() == 4 && l.getStart() != 12)
-							next
-						end
-					end
-				
-					if(s.getPractical() == "D" || s.getPractical() == "E")
-						next
-					end
-				
-					if s.getPractical() == "C" && l.getLocation().include?("043")
-						next
-					end
-				
-					if s.getPractical() != "C" && !l.getLocation().include?("043")
-						next
-					end
-				end
-			elsif(td == 2) # Wednesday
-				if(l.getName() == "CS-170")
-					if(s.getLastID() % 2 == 1 && l.getStart() == 10)
-						next
-					end
-			
-					if(s.getLastID() % 2 == 0 && l.getStart() == 11)
-						next
-					end
-			
-					loc = l.getLocation()
-					if(loc.include?("B") || loc.include?("D"))
-						if(s.getLastID() > 1)
-							next
-						end
-					elsif(loc.include?("38"))
-						if(s.getLastID() > 3 || s.getLastID() < 2)
-							next
-						end
-					elsif(loc.include?("314"))
-						if(s.getLastID() > 5 || s.getLastID() < 4)
-							next
-						end
-					elsif(loc.include?("45"))
-						if(s.getLastID() > 7 || s.getLastID() < 6)
-							next
-						end
-					elsif(loc.include?("47"))
-						if(s.getLastID() > 9 || s.getLastID() < 8)
-							next
-						end
-					end
-				end
-			elsif (td == 3) # Thursday
-				if(l.getName() == "CS-130")
-					if(s.getSeminar() != 5 && l.getStart() == 9)
-						next
-					end
-			
-					if (s.getPractical() != "D" || s.getPractical() != "E") && (l.getStart() == 16 || l.getStart == 17)
-						next
-					end
-				end
-			elsif(td == 4) #Friday
-				if(l.getName() == "CS-110")
-					if(s.getGroup() < 2)
-						next
-					end
-			
-					if(s.getGroup() == 2 && l.getLength() != 1) #In group 2 and the lecture is 2 hours long
-						next
-					end
-					if(s.getGroup() == 3 && l.getLength() != 2) #In group 3 and the lecture is 1 hour long
-						next
-					end
-				end
-			end
-			res.push(l)
 			end
 		end
 		return res
@@ -433,16 +471,22 @@ class Timetable
 	
 	private
 	def doubleCheck()
-		puts @lectures
 		getDay(1)
+		#puts @specific
 		rem = [] #Elements we need to remove
-		for i in 0..@specific.length-2
+		for i in 0..@specific.length-1
 			cl = @specific[i]
-			nl = @specific[i+1]
 			
-			#puts cl.getLength()
-			#puts nl.getLength()
+			if cl.getEnd() == 18
+				rem.push(cl)
+			end
 		end
-		puts rem
+		
+		getDay(4)
+		for i in 0..@specific.length-1
+			cl = @specific[i]
+		end
+		
+		@lectures = @lectures - rem
 	end
 end
