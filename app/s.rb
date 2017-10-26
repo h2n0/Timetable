@@ -14,7 +14,7 @@ set :session_secret, "setme"
 f = Nokogiri::HTML(open("int/timetable"))
 t = Timetable.new(f)
 log = SWLogger.new("public/logs/")
-callbackURI = ""
+callbackURI = nil
 
 if ARGV[0] == 'production'
 	puts "Running in produciton mode!"
@@ -184,7 +184,7 @@ get "/permCall" do
 	client_secrets = Google::APIClient::ClientSecrets.load
   auth_client = client_secrets.to_authorization
   
-  call = callbackURI == "" ? url("/permCall") : callbackURI
+  call = callbackURI || url("/permCall")
   auth_client.update!(
     :scope => 'https://www.googleapis.com/auth/calendar',
     :redirect_uri => call)
