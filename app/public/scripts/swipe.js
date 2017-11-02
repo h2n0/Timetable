@@ -5,7 +5,6 @@ var Swipe = function(dom){
 	var self = this;
 	
 	function handleEvent(e){
-		e.preventDefault();
 		switch(e.type){
 		
 			case "pointerdown":
@@ -61,26 +60,37 @@ Swipe.prototype.touches = {
 }
 
 Swipe.prototype.swipeStart = function(e){
-		e.preventDefault();
-		if(!e.touches || e.touches.length > 1){
-			return;
-		}
+	e.preventDefault();	
+	
+	var x = -1;
+	var y = -1;
+	if(e instanceof PointerEvent){
+		x = e.clientX;
+		y = e.clientY;
+	}else{
 		var t = e.touches[0];
-		var x = t.clientX;
-		var y = t.clientY;
-		
-		this.touches["start"].x = x;
-		this.touches["start"].y = y;
+		x = t.clientX;
+		y = t.clientY;
+	}
+	
+	this.touches["start"].x = x;
+	this.touches["start"].y = y;
 }
 
 Swipe.prototype.swipeChange = function(e){	
 	e.preventDefault();
-	if(!e.touches || e.touches.length > 1){
-		return;
+		
+	var x = -1;
+	var y = -1;
+	if(e instanceof PointerEvent){
+		x = e.clientX;
+		y = e.clientY;
+	}else{
+		var t = e.touches[0];
+		x = t.clientX;
+		y = t.clientY;
 	}
-	var t = e.touches[0];
-	var x = t.clientX;
-	var y = t.clientY;
+		
 	this.touches["move"].x = x;
 	this.touches["move"].y = y;
 }
@@ -94,8 +104,8 @@ Swipe.prototype.swipeEnd = function(e){
 	
 	var limit = 30;
 	
-	if(dy < 0 && Math.abs(dx) < 30)this.onUp();
-	if(dy > 0 && Math.abs(dx) < 30)this.onDown();
-	if(dx < 0 && Math.abs(dy) < 30)this.onLeft();
-	if(dx > 0 && Math.abs(dy) < 30)this.onRight();
+	if(dy < 0 && Math.abs(dx) < 30 && this.onUp)this.onUp();
+	if(dy > 0 && Math.abs(dx) < 30 && this.onDown)this.onDown();
+	if(dx < 0 && Math.abs(dy) < 30 && this.onLeft)this.onLeft();
+	if(dx > 0 && Math.abs(dy) < 30 && this.onRight)this.onRight();
 }
