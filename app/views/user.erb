@@ -70,12 +70,28 @@
 		</div>
 		
 		
+		<script src="scripts/swipe.js" type="text/javascript"></script>
 		<script>
 			var tab = $("tab")
+			var tp = tab.parentElement;
 			tab.onmousedown = function(){
-				var tp = tab.parentElement;
 				tp.classList.toggle("hidden");
 				tab.innerHTML = tp.classList.contains("hidden")?">":"<";
+			}
+			
+			var sw = new Swipe();
+			sw.onRight = function(){
+				if(tp.classList.contains("hidden")){// Closed, so we can open
+					tp.classList.remove("hidden");
+					tab.innerHTML = "<";
+				}
+			}
+			
+			sw.onLeft = function(){
+				if(!tp.classList.contains("hidden")){// Open, we can close it
+					tp.classList.add("hidden");
+					tab.innerHTML = ">";
+				}
 			}
 		</script>
 	</body>
