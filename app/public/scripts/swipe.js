@@ -6,14 +6,21 @@ var Swipe = function(dom){
 	
 	function handleEvent(e){
 		switch(e.type){
+		
+			case "pointerdown":
 			case "mousedown":
 			case "touchstart":
 				self.swipeStart(e);
 				break;
+				
+			case "pointermove":
 			case "mousemove":
 			case "touchmove":
 				self.swipeChange(e);
 				break;
+				
+			case "pointerup":
+			case "pointercancel":
 			case "mouseup":
 			case "touchend":
 			case "touchcancel":
@@ -30,8 +37,12 @@ var Swipe = function(dom){
 	
 	
 	if(window.PointerEvent){ // Do we have pointers
-		
+		dom.addEventListener("pointerdown", handleEvent, true);
+		dom.addEventListener("pointermove", handleEvent, true);
+		dom.addEventListener("pointerup", handleEvent, true);
+		dom.addEventListener("pointercancel", handleEvent, true);
 	}else{ // We don't, use mouse and touch instead
+		console.log("HUI");
 		dom.addEventListener("touchstart", handleEvent, true);
 		dom.addEventListener("touchmove", handleEvent, true);
 		dom.addEventListener("touchend", handleEvent, true);
