@@ -77,10 +77,10 @@ class EasyCalendar
 	# @see https://github.com/google/google-api-ruby-client/blob/master/generated/google/apis/calendar_v3/service.rb Events
 	def getEventsForXDaysTime(calendar, forward)
 		day = 60* 60 * 24
-		min = Time.now + (day * forward)
+		min = Time.parse("06:00") + (day * forward)
 		max = min + day
 		response = @service.list_events(calendar.id, max_results: 10, single_events: true, order_by: 'startTime', time_min: min.iso8601, time_max: max.iso8601)
-		return response
+		return response.items
 	end
 	
 	# Add an event to the given calendar
@@ -91,22 +91,31 @@ class EasyCalendar
 		@service.insert_event(calendar.id, event)
 	end
 	
+	# This is a small debug function used to clear the calendar in the case that it gets full of too many events
+	# @param calendar [Google::Apis::CalendarV3::Calendar]
+	def clearCalendar(calendar)
+		evs = getEventsForXDaysTime(calendar, 1)
+		evs.each do |e|
+			@service.delete_event(calendar.id, e.id)
+		end
+	end
+	
 	private
+	
+	# Check if the given date is in GMT+01 or is just GMT
+	# @param date [DateTime]
 	def bst?(date)
 	
-		march = DateTime.new(date.year, 3, 31).to_date
+		# Clocks go forward on the last sunday of March
+		march = DateTime.new(date.year, 3, 31).to_date # Start at the end of the month
 		while !march.sunday?
-			march = march.next_day(-1)
+			march = march.next_day(-1) #Until we hit a sunday (which will be the last)
 		end
 		
-		march = DateTime.new(date.year, 3, 31).to_date
-		while !march.sunday?
-			march = march.next_day(-1)
-		end
-		
-		october = DateTime.new(date.year, 10, 31).to_date
+		# Clocks go back on the last sunday of October
+		october = DateTime.new(date.year, 10, 31).to_date # Start at the end of the month
 		while !october.sunday?
-			october = october.next_day(-1)
+			october = october.next_day(-1) #Until we hit a sunday (which will be the last)
 		end
 	
 		return date > march && date < october

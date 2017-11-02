@@ -102,7 +102,7 @@ var onfinish = null;
 var cols = null;
 var pdom = null;
 
-function paintInit(dom){
+var Paint = function(dom){
 	if(opened){
 		pdom.removeChild($("paintHolder"));
 		onchange = null;
@@ -161,7 +161,7 @@ function paintInit(dom){
 	}
 }
 
-function drawMid(h, update) {
+Paint.prototype.drawMid = function(h, update) {
 	update = update || false;
 	var data = ctx.getImageData(0, 0, can.width, can.height);
 	var s = can.width;
@@ -199,7 +199,7 @@ var s = 0;
 var l = 0;
 //drawMid(h);
 
-function change(e, callback) {
+Paint.prototype.change = function(e, callback) {
 	var rect = can.getBoundingClientRect();
 	var mx = e.layerX - rect.left;
 	var my = e.layerY - rect.top;
@@ -213,13 +213,13 @@ function change(e, callback) {
 		sa = Math.max(0, Math.floor(sa));
 		vo = Math.max(0, Math.floor(vo));
 		var col = hsvToRgb(h, sa, vo);
-		if (callback) {
-			callback(col);
+		if (this.callback) {
+			this.callback(col);
 		}
 	} else {
 		var rad = Math.atan2(dy, dx);
 		h = rad * 180 / Math.PI;
 		h += 180;
-		drawMid(h, false);
+		this.drawMid(h, false);
 	}
 }

@@ -8,31 +8,6 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<script src="scripts/paint.js" type="text/javascript"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<script>
-			onchange = function(dom, col){
-				var docs = document.getElementsByClassName("lecture");
-				var plec = dom.parentElement.getAttribute("lec");
-				for(var i = 0; i < docs.length; i++){
-					if(docs[i].getAttribute("lec") == plec){
-						docs[i].style.backgroundColor = "rgb("+col[0]+","+col[1]+","+col[2]+")";
-					}
-				}
-			}
-			
-			onfinish = function(dom, col){
-			
-				
-				var d = dom.parentElement.getAttribute("lec");
-			
-			
-				var update = "/user/<%= id %>/cols/"+d+"/";
-				for(var i = 0; i < col.length; i++){
-					update += col[i] + "/";
-				}
-				window.location = update;
-			}
-		</script>
 	</head>
 	
 	<body>
@@ -40,10 +15,34 @@
 			<h1><%= id %></h1>
 			<h2>- <%= day %> -</h2>
 			<a href="/"><< Back</a>
+			
+			<div class="side hidden"><!-- Edit tab -->
+			
+				<div class="side-tab" id="tab">
+					>
+				</div>
+				<div class="side-inner">
+					<h2>Edit</h2>
+					
+					<% p = [] %>
+					<% lecs.each do |l| %>
+						<% if !p.include?(l.getName()) %>
+							<% p.push(l.getName()) %>
+						<% end %>
+					<% end %>
+					
+					<% p.each do |n| %>
+						<div>
+							<p><%= n %></p></br>
+						</div>
+					<% end %>
+				</div>
+			</div>
 			 <div>
 				<% lecs.select!{|l| l.getStart() > hour} %>
 
 				<% if lecs.length > 0 %>
+					<% i = 0 %>
 					<% lecs.each do |l| %>
 						
 						<% col = "#FFF" %>
@@ -56,13 +55,12 @@
 						<% col = "#FF" if col == nil %>
 						<% end %>
 						
-						<div class="lecture" lec="<%= l.getName() %>"style="background-color: <%= col %>">
+						<div class="lecture slot-<%= (i%2)+1 %>" lec="<%= l.getName() %>" style="background-color: <%= col %>">
 							<h2><%= l.getName() %></h2>
 							<p><%= l.getStart() %></p>
 							<p><%= l.getLocation() %></p>
-							
-							<p onclick="paintInit(this)">Edit</p>
 						</div>
+						<% i += 1 %>
 					<% end %>
 				<% else %>
 					<h2>No lectures today</h2>
@@ -70,5 +68,15 @@
 				<a href="/feedback/<%= id %>">Something wrong?</a>
 			</div>
 		</div>
+		
+		
+		<script>
+			var tab = $("tab")
+			tab.onmousedown = function(){
+				var tp = tab.parentElement;
+				tp.classList.toggle("hidden");
+				tab.innerHTML = tp.classList.contains("hidden")?">":"<";
+			}
+		</script>
 	</body>
 </html>

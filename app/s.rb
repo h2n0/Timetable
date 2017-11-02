@@ -34,7 +34,7 @@ get "/" do
 end
 
 # User is sent here why the update their settings
-get "/user/:id/cols/*/*/*/*" do
+get "/user/cols/*/*/*/*" do
 	parts = params["splat"]
 	name = parts[0]
 	
@@ -229,6 +229,8 @@ get "/gcal" do
 	
 	ecal = EasyCalendar.new(auth_client)
 	cal = ecal.getCalendarByName("Uni Timetable")
+	
+	ecal.clearCalendar(cal)
 	s = Student.fromNumber(id)
 	t.getDay(Time.now.wday)
 	lecs = t.getLectures(s)
@@ -239,8 +241,9 @@ get "/gcal" do
 		ti = Time.now + 60*60*24
 		date = "#{ti.year}-#{ti.month}-#{ti.day}"
 		tomLecs = ecal.getEventsForXDaysTime(cal, 1) #Get tomorrow's events (Lectures)
-		if tomLecs.items.length == 0 # No events tomorrow just add them
-			
+		puts tomLecs[0]
+		if tomLecs.length == 0 # No events tomorrow just add them
+			puts "Nothing new"
 			lecs.each do |l|
 				s = l.getStart()
 				len = l.getLength()
@@ -248,17 +251,17 @@ get "/gcal" do
 				ecal.addEvent(cal, event)
 			end
 		else # Some events tomorrow so we need to see if they are ours
-			if tomLecs.items.length == lecs.length
-				for i in 0..lecs.length
+			if tomLecs.length == lecs.length
+				puts "We have the same ammount"
+				for i in 0..lecs.length-1
 					cl = lecs[i]
-					ctl = tomLecs.items[i]
+					ctl = tomLecs[i]
 					
+					puts cl.getName()
+					puts ctl.summary
+					puts ""
 					
-					if cl == nil || ctl == nil
-						next
-					end
-					
-					if cl.getName() == ctl.summary  # Do they have the same name
+					if cl.getName() == ctl.summary && cl.getDateTime() == ctl.start.date_time  # Do they have the same name"
 						next # Skip this event
 					else
 						s = cl.getStart()
@@ -268,10 +271,10 @@ get "/gcal" do
 					end
 				end
 			else
-				if tomLecs.items.length > lecs.length
+				if tomLecs.length > lecs.length
 					puts "Tomorrow has more events than we do"
-					for i in 0..tomLecs.items.length - 1
-						ctl = tomLecs.items[i]
+					for i in 0..tomLecs.length - 1
+						ctl = tomLecs[i]
 						
 						if ctl == nil
 							next
@@ -320,6 +323,6 @@ end
 
 # Simple error correction page
 error 404 do
-	log.err("Something wasn't found\n#{params}")
+	log.err("Something wasn't found @ #{request.url}\n#{params}")
 	redirect "/"
 end

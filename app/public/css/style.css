@@ -2,8 +2,37 @@ body{
 	font-family: "sans-serif";
 }
 
-html{
-	
+.side {
+	position: absolute;
+	height: 100%;
+	top: 0%;
+	left: 0%;
+	width: 30%;
+	background-color: #777;
+	transition: transform 0.4s ease;
+}
+
+.side.hidden{
+	-ms-transform: translate(-100%, 0);
+	-moz-transform: translate(-100%, 0);
+	-webkit-transform: translate(-100%, 0);
+	transform: translate(-100%, 0);
+}
+
+.side-tab{
+	position: relative;
+	width: 20px;
+	right: -100%;
+	top: 20%;
+	background-color: inherit;
+	border: 1px solid inherit;
+	border-radius: 0% 20% 20% 0%;
+	color: white;
+	cursor: pointer;
+}
+
+.side-inner.hidden{
+	display: none;
 }
 
 .center{
@@ -47,4 +76,18 @@ input#id{
 	background-color: #CCC;
 	cursor: default;
 	
+}
+
+
+
+@media only screen and (max-width: 400px) {
+	
+	input#id{
+		width: 80%;
+	}
+	
+	.btn{
+		width: 80%;
+		font-size: 2em;
+	}
 }

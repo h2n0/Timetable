@@ -39,6 +39,7 @@ class SWLogger
 	# @return [String] YYYY-MM-DD @ HH:MM:SS
 	def getTimestamp()
 		t = Time.now
-		return "[#{t.year}-#{t.month}-#{t.day} @ #{t.hour}:#{t.min}:#{t.sec}]"
+		s = t.strftime("%Y-%m-%d @ %H:%M:%S")
+		return "[#{s}]"
 	end
 end
