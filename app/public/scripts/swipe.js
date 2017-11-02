@@ -5,6 +5,7 @@ var Swipe = function(dom){
 	var self = this;
 	
 	function handleEvent(e){
+		e.preventDefault();
 		switch(e.type){
 		
 			case "pointerdown":
@@ -42,7 +43,6 @@ var Swipe = function(dom){
 		dom.addEventListener("pointerup", handleEvent, true);
 		dom.addEventListener("pointercancel", handleEvent, true);
 	}else{ // We don't, use mouse and touch instead
-		console.log("HUI");
 		dom.addEventListener("touchstart", handleEvent, true);
 		dom.addEventListener("touchmove", handleEvent, true);
 		dom.addEventListener("touchend", handleEvent, true);
