@@ -373,6 +373,14 @@ class Timetable
 						if l.getStart() == 14
 							res.push(l)
 						end
+						
+						if l.getStart() == 15 && (lastID == 0 || lastID == 4)
+							res.push(l)
+						end
+						
+						if l.getStart() == 16 && (lastID == 5 || lastID == 7)
+							res.push(l)
+						end
 					end
 					
 					if l.getName() == "CS-130"
@@ -441,7 +449,17 @@ class Timetable
 					end
 					
 					if l.getName() == "CS-150"
-						res.push(l)
+						if l.getStart() == 14
+							res.push(l)
+						end
+						
+						if l.getStart == 13 && (lastID == 1 || lastID == 2)
+							res.push(l)
+						end
+						
+						if l.getStart() == 15 && (lastID == 8 || lastID == 9)
+							res.push(l)
+						end
 					end
 					
 				elsif td == 4 #Friday
@@ -451,7 +469,13 @@ class Timetable
 					end
 					
 					if l.getName() == "CS-150"
-						res.push(l)
+						if l.getStart() == 14
+							res.push(l)
+						end
+						
+						if l.getStart() == 12 && (lastID == 3 || lastID == 6)
+							res.push(l)
+						end
 					end
 					
 					if l.getName() == "CS-110"
@@ -468,6 +492,8 @@ class Timetable
 		end
 		return res
 	end
+	
+	# 150 Hour ID
 	
 	private
 	def doubleCheck()
