@@ -8,6 +8,10 @@ Build using.
 
 * Bash => To automate some cron jobs
 
+### EDIT
+This project is no longer being maintained
+
+
 ## Project tree
 
 *  [App](./app)
